@@ -1,0 +1,30 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content%}
+{% load crispy_forms_tags %}
+ <div class="modal-dialog modal-dialog-centered" role="document">
+     <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle1">Update Order</h5>
+              
+            </div>
+            <div class="modal-body">
+                <form action=""  method="POST"> 
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <input class="btn btn-sm btn-info"type="submit"  value="Submit">
+                    <a  class="btn btn-sm btn-danger"href="{% url 'home'%}">Cancel</a>
+                </form>
+            </div>
+            <div class="modal-footer">
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

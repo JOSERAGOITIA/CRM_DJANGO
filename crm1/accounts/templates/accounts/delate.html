@@ -9,7 +9,6 @@
             </div>
             <div class="modal-body">
                 <form action=""   method="POST">
-                    
                     {% csrf_token %}
                     {{form|crispy}}
                     <input class="btn btn-sm btn-info" type="submit"  value="Submit">

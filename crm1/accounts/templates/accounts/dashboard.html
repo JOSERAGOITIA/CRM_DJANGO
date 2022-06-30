@@ -11,33 +11,34 @@
         <h5>Customer</h5>
         <hr>
         <div class="card card-body">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Creat Customer</button>
             <table class="table table-sm">
                 <tr>
-                    <th></th>
-                    <th>Customer</th>
+                    
+                    <th>User</th>
+                    <th>Type</th>
                     <th>Phone</th>
                 </tr>
+            
                 {% for customer in customers %}
                 <tr>
-                    <td><a class="btn btn-sm btn-info" href="{% url 'customer' customer.id %}">View</a></td>
-                    <td>{{customer.name}}</td>
+                    <td>{{customer.user}}</td>
+                    <td>{{customer.type.}}</td>
                     <td>{{customer.phone}}</td>
                     
                 </tr>
                 {% endfor%}
+            
             </table>
         </div>
     </div>
     <div class="col med-7">
-        <h5>LAST 5 ORDERS</h5>
+        <h5>Users Pending to be Approved </h5>
         <hr>
         <div class="card card-body">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter1">Creat Order</button>
             <table class="table table-sm">
                 <tr>
-                    <th>Products</th>
-                    <th>Date Order</th>
+                    <th>User</th>
                     <th>Status</th>
                     <th>Update</th>
                     <th>Remove</th>
@@ -45,10 +46,9 @@
                 {% for order in orders %}
                     <tr>
                         
-                        <td>{{order.product}}</td>
-                        <td>{{order.date_created}}</td>
+                        <td>{{order.customer}}</td>
                         <td>{{order.status}}</td>
-                        <td><a class="btn btn-sm btn-info"href="{% url 'update_order' order.id %}"   >Update</a></td>
+                        <td><a class="btn btn-sm btn-info"href="{% url 'update_order' order.id %}" >Update</a></td>
                         <td><a class="btn btn-sm btn-danger" href="{% url 'delate_order' order.id %}">Delate</a></td>
                         
 
@@ -59,28 +59,85 @@
         </div>
     </div>
 </div>
-<div  class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Creat Customer</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                <form  action=""  method="POST">
-                    {% csrf_token %}
-                    {{formc|crispy}}
-                    <input type="submit" value="Submit">
-                    <input type="reset" value="Reset">
-                </form>
-            </div>
-            <div class="modal-footer">
-            </div>
+<br>
+<div class="row">
+    <div class="col-md-5">
+        <h5>Mentors </h5>
+        <hr>
+        <div class="card card-body">
+            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+            <br>
+            <table class="table table-sm">
+                <tr>
+                    <th>User</th>
+                    <th>Status</th>
+
+                </tr>
+                <tbody id="myTable">
+                {% for order in orders%}
+                <tr>
+                    <td>{{order.customer}}</td>
+                    <td>{{order.status}}</td>
+
+                 
+                    
+                </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
         </div>
     </div>
+    <div class="cold-md-5">
+        <h5>Members </h5>
+        <hr>
+        <div class="card card-body">
+            <input class="form-control" id="myInput1" type="text" placeholder="Search..">
+            <br>
+            <table class="table table-sm">
+                <tr>
+                    <th>User</th>
+                    <th>Type</th>
+                    <th>expertis</th>
+
+                </tr>
+                <tbody id="myTable1">
+                {% for customer in customers%}
+                <tr>
+                    <td>{{customer.name}}</td>
+                    <td>{{customer.type}}</td>
+                    <td>{{customer.expertis}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
 </div>
+<script>
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+      $("#myInput1").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable1 tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+</script>
+
+
 <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -105,7 +162,9 @@
 </div>
 
 
+
 {% endblock %}
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

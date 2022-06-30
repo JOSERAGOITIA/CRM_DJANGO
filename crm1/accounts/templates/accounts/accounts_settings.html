@@ -1,0 +1,20 @@
+{% extends 'accounts/main.html'%}
+{% load static%}
+{% block content %}
+
+<br>
+<div class="row">
+    <div class="col-md-3">
+        <div class="card card-body">
+            <h3>Profile Information</h3>
+            <form method="POST" enctype="multipart/form-data" >
+                {% csrf_token %}
+                {{form.as_p}}
+                <input class="btn btn-primary"  type="submit" value="Submit">
+                <a class="btn btn-warning" href="{% url 'home' %}"> &#8592;Regresar</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

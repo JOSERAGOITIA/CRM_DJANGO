@@ -1,0 +1,55 @@
+{% extends 'accounts/main.html' %}
+{% block content%}
+{% load crispy_forms_tags %}
+   
+<br>
+<h3>Mentos List</h3>
+<br>
+<div class="row">
+   <div class="col">
+  <div class="card card-body">
+  <form method="get">
+          {{tableFilter.form}}
+       <button class="btn btn-primary" type="submit">Search</button>
+  </form>
+  </div>
+   </div>
+</div>
+
+<br>
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <table class="table table-sm">  
+                <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Date Order</th>
+                    <th>Status</th>
+                  
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+                {% for order in orders%}
+                <tr>
+                    <td>{{order.product}}</td>
+                    <td>{{order.product.category}}</td>
+                    <td>{{order.date_created}}</td>
+                    <td>{{order.status}}</td>
+                
+                    <td><a class="btn btn-sm btn-info"href="#"   >Update</a></td>
+                    <td><a class="btn btn-sm btn-danger" href="#">Remove</a></td>
+                 
+                    
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
